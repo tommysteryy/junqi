@@ -1,35 +1,31 @@
-let blackCard: string;
-let redCard: string;
-const cardSizes: object = {
-    "gong": 1,
-    "pai": 2,
-    "lian": 3,
-    "ying": 4,
-    "tuan": 5,
-    "lv": 6,
-    "shi": 7,
-    "jun": 8,
-    "si": 9
-}
-    
-const cardIndex: Map<string, number> = new Map(Object.entries(cardSizes));
-
+import { fight, isValid, Player } from "./src/card";
 
 function getCards(): void {
-    blackCard = (document.getElementById("black-card") as HTMLInputElement).value;
-    redCard = (document.getElementById("red-card") as HTMLInputElement).value;
-    // console.log("Black: ", blackCard);
-    // console.log("Red: ", redCard);
 
-    let result = calculateResult(blackCard, redCard);
-    displayResult();
+    var blackCard = (document.getElementById("black-card") as HTMLInputElement).value;
+    var redCard = (document.getElementById("red-card") as HTMLInputElement).value;
+    
+    if (!isValid(blackCard, redCard)) {
+        throw new Error("One of the black or red cards is invalid. Please check again.");
+    }
+
+    let result: Player = fight(blackCard, redCard);
+    displayResult(result);
 }
 
-function calculateResult(blackCard: string, redCard: string) {
-    throw new Error("Function not implemented.");
-}
-
-function displayResult(): void{
-    throw new Error("Function not implemented.");
+function displayResult(result: Player): void {
+    let message: string;
+    if (result === Player.BLACK_WIN) {
+        message = "Player black won the game!";
+    } else if (result === Player.RED_WIN) {
+        message = "Player RED won the game!";
+    } else if (result === Player.BLACK_BIGGER) {
+        message = "The black card survives!";
+    } else if (result === Player.RED_BIGGER) {
+        message = "The red card survives!"
+    } else {
+        message = "Both cards die!"
+    }
+    console.log(message);
 }
 
