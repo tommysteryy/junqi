@@ -1,0 +1,11 @@
+{
+  "name": "junqi",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/tommysteryy/junqi.git",
+  "author": "Tommy Xu <tommysteryy@outlook.com>",
+  "license": "MIT",
+  "dependencies": {
+    "ts-node": "^10.9.1"
+  }
+}
